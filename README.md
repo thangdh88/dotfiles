@@ -1,2 +1,2 @@
 # tdh-dotfiles
-private setting on my Mac
+:sunflower: Persional dotfile for my MacOS :sunflower:
