@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# ------------------------------------------------------------------------------
+#  Configurations.
+# ------------------------------------------------------------------------------
+
+DOTFILES=$HOME/dotfiles
+
+echo "Setting up your Mac..."
+
+# ------------------------------------------------------------------------------
+#  Check Oh my Zsh installed and install it if not
+# ------------------------------------------------------------------------------
+
+if [ -d ~/.oh-my-zsh ]; then
+	echo "Oh-my-Zsh is installed"
+else
+    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
+fi
+
+# ------------------------------------------------------------------------------
+#  Check Brew installed and install its and its dependencies
+# ------------------------------------------------------------------------------
+
+if test ! $(which brew); then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+
+brew update
+brew tap homebrew/bundle
+brew bundle
+
+# ------------------------------------------------------------------------------
+#  Global shell configurations.
+# ------------------------------------------------------------------------------
+
+# Use global .gitignore file.
+git config --global core.excludesfile $DOTFILES/.gitignore_global
+
+# Use zsh as default shell.
+chsh -s $(which zsh)
+
